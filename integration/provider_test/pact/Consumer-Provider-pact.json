@@ -1,0 +1,59 @@
+{
+  "consumer": {
+    "name": "Consumer"
+  },
+  "provider": {
+    "name": "Provider"
+  },
+  "interactions": [
+    {
+      "providerState": "UserA doesn't exists",
+      "description": "a request for User",
+      "request": {
+        "method": "GET",
+        "path": "/api/users/23"
+      },
+      "response": {
+        "status": 404
+      }
+    },
+    {
+      "providerState": "UserA exist",
+      "description": "a request for User",
+      "request": {
+        "method": "GET",
+        "path": "/api/users/2"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "data": {
+            "id": 2,
+            "email": "janet.weaver@reqres.in",
+            "first_name": "Janet",
+            "last_name": "Weaver",
+            "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"
+          },
+          "ad": {
+            "company": "StatusCode Weekly",
+            "url": "http://statuscode.org/",
+            "text": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+          }
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          },
+          "$.body.data.email": {
+            "regex": "\\S+@\\S+"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
